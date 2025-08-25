@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 28 Des 2019 pada 02.52
--- Versi Server: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: localhost:3306
+-- Generation Time: Aug 21, 2025 at 03:55 AM
+-- Server version: 8.0.30
+-- PHP Version: 7.4.32
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -23,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_admin`
+-- Table structure for table `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -32,7 +33,7 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_admin`
+-- Dumping data for table `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`username`, `password`) VALUES
@@ -41,17 +42,17 @@ INSERT INTO `tb_admin` (`username`, `password`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_datapilketos`
+-- Table structure for table `tb_datapilketos`
 --
 
 CREATE TABLE `tb_datapilketos` (
-  `id` int(1) NOT NULL DEFAULT '1',
+  `id` int NOT NULL DEFAULT '1',
   `tapel` varchar(10) NOT NULL,
   `tgl` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_datapilketos`
+-- Dumping data for table `tb_datapilketos`
 --
 
 INSERT INTO `tb_datapilketos` (`id`, `tapel`, `tgl`) VALUES
@@ -60,7 +61,7 @@ INSERT INTO `tb_datapilketos` (`id`, `tapel`, `tgl`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_identitassekolah`
+-- Table structure for table `tb_identitassekolah`
 --
 
 CREATE TABLE `tb_identitassekolah` (
@@ -75,46 +76,58 @@ CREATE TABLE `tb_identitassekolah` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_identitassekolah`
+-- Dumping data for table `tb_identitassekolah`
 --
 
 INSERT INTO `tb_identitassekolah` (`npsn`, `nm_sekolah`, `jln`, `desa`, `kec`, `kab`, `kpl_sekolah`, `nip`) VALUES
-('1234567', 'SMK Muhammadiyah Marioriwawo', 'Takalala', 'Tettikenrarae', 'Marioriwawo', 'Soppeng', 'Dra.Hj.Syamsiar, M.Si', '33333333333');
+('20338635', 'SMKS WALISONGO PECANGAAN ', 'Jl. Kauman No.1', 'Pecangaan Kulon', 'Pecangaan', 'Jepara', 'Irbab Aulia Amri, S.Pd, M.Pd', '');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_kelas`
+-- Table structure for table `tb_kelas`
 --
 
 CREATE TABLE `tb_kelas` (
-  `kd_kelas` int(3) NOT NULL,
+  `kd_kelas` int NOT NULL,
   `nm_kelas` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tb_kelas`
+-- Dumping data for table `tb_kelas`
 --
 
 INSERT INTO `tb_kelas` (`kd_kelas`, `nm_kelas`) VALUES
-(1, 'X TKJ 1'),
-(2, 'X TKJ 2'),
-(3, 'X AKUN'),
-(4, 'XI TKJ 1'),
-(5, 'XI TKJ 2'),
-(6, 'XI AKUN'),
-(7, 'XII TKJ 1'),
-(8, 'XII TKJ 2'),
-(9, 'XII AKUN');
+(11, 'X DPK'),
+(12, 'XI DPK'),
+(13, 'XII DPK'),
+(14, 'X AKL'),
+(16, 'XI AKL'),
+(17, 'XII AKL'),
+(18, 'X TO A'),
+(19, 'XI TO A'),
+(20, 'XII TO A'),
+(21, 'X TO B'),
+(22, 'XI TO B'),
+(23, 'XII TO B'),
+(24, 'X TO INDUSTRI'),
+(25, 'XI TO INDUSTRI'),
+(26, 'XII TO INDUSTRI'),
+(27, 'X TJKT A'),
+(28, 'XI TJKT A'),
+(29, 'XII TJKT A'),
+(30, 'X TJKT B'),
+(31, 'XI TJKT B'),
+(32, 'XII TJKT B');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pilih`
+-- Table structure for table `tb_pilih`
 --
 
 CREATE TABLE `tb_pilih` (
-  `id_pilih` int(11) NOT NULL,
+  `id_pilih` int NOT NULL,
   `nisn` varchar(32) NOT NULL,
   `username` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -122,20 +135,20 @@ CREATE TABLE `tb_pilih` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_pilihan`
+-- Table structure for table `tb_pilihan`
 --
 
 CREATE TABLE `tb_pilihan` (
   `nisn` varchar(32) NOT NULL,
   `nama` varchar(32) NOT NULL,
   `photo` varchar(32) NOT NULL,
-  `no` int(1) NOT NULL
+  `no` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_siswa`
+-- Table structure for table `tb_siswa`
 --
 
 CREATE TABLE `tb_siswa` (
@@ -143,7 +156,7 @@ CREATE TABLE `tb_siswa` (
   `password` varchar(32) NOT NULL,
   `nm_siswa` varchar(32) DEFAULT NULL,
   `jk` char(1) NOT NULL,
-  `kd_kelas` int(3) DEFAULT NULL,
+  `kd_kelas` int DEFAULT NULL,
   `hadir` varchar(12) NOT NULL DEFAULT 'Tidak Hadir'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -151,43 +164,45 @@ CREATE TABLE `tb_siswa` (
 
 --
 -- Stand-in structure for view `view_daftarhadir`
+-- (See below for the actual view)
 --
 CREATE TABLE `view_daftarhadir` (
 `NISN` varchar(32)
-,`nm_siswa` varchar(32)
 ,`nm_kelas` varchar(32)
+,`nm_siswa` varchar(32)
 );
 
 -- --------------------------------------------------------
 
 --
 -- Stand-in structure for view `view_vote`
+-- (See below for the actual view)
 --
 CREATE TABLE `view_vote` (
-`nisn` varchar(32)
-,`nama` varchar(32)
+`nama` varchar(32)
+,`nisn` varchar(32)
+,`no` int
 ,`photo` varchar(32)
-,`no` int(1)
 ,`username` varchar(32)
 );
 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `view_daftarhadir`
+-- Structure for view `view_daftarhadir`
 --
 DROP TABLE IF EXISTS `view_daftarhadir`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_daftarhadir`  AS  select `tb_siswa`.`username` AS `NISN`,`tb_siswa`.`nm_siswa` AS `nm_siswa`,`tb_kelas`.`nm_kelas` AS `nm_kelas` from ((`tb_siswa` join `tb_kelas` on((`tb_kelas`.`kd_kelas` = `tb_siswa`.`kd_kelas`))) join `tb_pilih` on((`tb_siswa`.`username` = `tb_pilih`.`username`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_daftarhadir`  AS SELECT `tb_siswa`.`username` AS `NISN`, `tb_siswa`.`nm_siswa` AS `nm_siswa`, `tb_kelas`.`nm_kelas` AS `nm_kelas` FROM ((`tb_siswa` join `tb_kelas` on((`tb_kelas`.`kd_kelas` = `tb_siswa`.`kd_kelas`))) join `tb_pilih` on((`tb_siswa`.`username` = `tb_pilih`.`username`)))  ;
 
 -- --------------------------------------------------------
 
 --
--- Struktur untuk view `view_vote`
+-- Structure for view `view_vote`
 --
 DROP TABLE IF EXISTS `view_vote`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_vote`  AS  select `tb_pilihan`.`nisn` AS `nisn`,`tb_pilihan`.`nama` AS `nama`,`tb_pilihan`.`photo` AS `photo`,`tb_pilihan`.`no` AS `no`,`tb_siswa`.`username` AS `username` from ((`tb_pilih` join `tb_pilihan` on((`tb_pilihan`.`nisn` = `tb_pilih`.`nisn`))) join `tb_siswa` on((`tb_siswa`.`username` = `tb_pilih`.`username`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_vote`  AS SELECT `tb_pilihan`.`nisn` AS `nisn`, `tb_pilihan`.`nama` AS `nama`, `tb_pilihan`.`photo` AS `photo`, `tb_pilihan`.`no` AS `no`, `tb_siswa`.`username` AS `username` FROM ((`tb_pilih` join `tb_pilihan` on((`tb_pilihan`.`nisn` = `tb_pilih`.`nisn`))) join `tb_siswa` on((`tb_siswa`.`username` = `tb_pilih`.`username`)))  ;
 
 --
 -- Indexes for dumped tables
@@ -243,12 +258,15 @@ ALTER TABLE `tb_siswa`
 -- AUTO_INCREMENT for table `tb_kelas`
 --
 ALTER TABLE `tb_kelas`
-  MODIFY `kd_kelas` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `kd_kelas` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
 --
 -- AUTO_INCREMENT for table `tb_pilih`
 --
 ALTER TABLE `tb_pilih`
-  MODIFY `id_pilih` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pilih` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
