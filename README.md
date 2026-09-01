@@ -83,6 +83,62 @@ Ikuti langkah-langkah berikut untuk menginstall dan menjalankan aplikasi di komp
 
 ---
 
+## 🌐 Deployment (Production VPS / Server Linux)
+
+Jika Anda meng-install aplikasi ini di VPS (misal Ubuntu/Debian dengan Nginx), pastikan Anda melakukan penyesuaian penting berikut:
+
+### 1. Konfigurasi Wajib `.env`
+Pastikan Anda mengubah `.env` menjadi mode produksi dan menggunakan driver `file` untuk mencegah error database.
+```env
+APP_NAME="E-Pilketos SMK"
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://epilketos.sekolahanda.sch.id
+
+# PENTING: Karena kita tidak memakai tabel bawaan Laravel, pastikan session menggunakan 'file'
+SESSION_DRIVER=file
+CACHE_STORE=file
+```
+Setelah diubah, selalu jalankan: `php artisan config:cache`
+
+### 2. Hak Akses Folder (Permissions)
+Berikan hak tulis kepada web server (misal: `www-data` atau `nginx`) ke folder storage dan cache untuk mencegah error `tempnam()`.
+```bash
+chown -R www-data:www-data /var/www/epilketos.sekolahanda.sch.id
+chmod -R 775 /var/www/epilketos.sekolahanda.sch.id/storage
+chmod -R 775 /var/www/epilketos.sekolahanda.sch.id/bootstrap/cache
+```
+
+### 3. Konfigurasi Nginx
+Pastikan `root` mengarah ke folder `public`, versi PHP disesuaikan minimal 8.2, dan ada konfigurasi `try_files`.
+```nginx
+server {
+    listen 80;
+    server_name epilketos.sekolahanda.sch.id;
+    
+    # Arahkan ke folder public
+    root /var/www/epilketos.sekolahanda.sch.id/public;
+    index index.php index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
+    location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        # PASTIKAN MENGGUNAKAN PHP 8.2 ATAU LEBIH BARU
+        fastcgi_pass unix:/run/php/php8.2-fpm.sock;
+    }
+
+    location ~ /\.(ht|env) {
+        deny all;
+    }
+}
+```
+Jika sudah, restart Nginx: `systemctl restart nginx`
+
+---
+
 ## 👑 Uji Coba Panel Admin
 
 Panel admin digunakan oleh panitia/guru untuk mengelola semua data sebelum dan sesudah pemilihan.
