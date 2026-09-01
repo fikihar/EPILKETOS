@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 namespace App\Http\Controllers\Admin;
 
@@ -40,9 +40,11 @@ class PilihanController extends Controller
 
         if ($request->hasFile("photo")) {
             $file = $request->file("photo");
-            $filename = time() . "_" . Str::slug($request->nama_ketua . "-" . $request->nama_wakil) . "." . $file->getClientOriginalExtension();
-            // Simpan ke storage/app/public/foto-calon
-            $file->storeAs("foto-calon", $filename, "public");
+            $filename = time() . "_" . Str::slug($request->nama_ketua . "-" . $request->nama_wakil) . ".webp";
+            
+            // Native Auto-Compress to WebP via GD
+            $this->compressAndSaveImage($file, "foto-calon", $filename);
+            
             $data["photo"] = $filename;
         }
 
@@ -81,8 +83,11 @@ class PilihanController extends Controller
             }
 
             $file = $request->file("photo");
-            $filename = time() . "_" . Str::slug($request->nama_ketua . "-" . $request->nama_wakil) . "." . $file->getClientOriginalExtension();
-            $file->storeAs("foto-calon", $filename, "public");
+            $filename = time() . "_" . Str::slug($request->nama_ketua . "-" . $request->nama_wakil) . ".webp";
+            
+            // Native Auto-Compress to WebP via GD
+            $this->compressAndSaveImage($file, "foto-calon", $filename);
+            
             $data["photo"] = $filename;
         }
 
@@ -109,7 +114,60 @@ class PilihanController extends Controller
 
         return redirect()->route("admin.kandidat.index")->with("success", "Data Kandidat berhasil dihapus.");
     }
+
+    /**
+     * Helper compress image native GD (Tanpa library berat)
+     */
+    private function compressAndSaveImage($file, $destinationFolder, $filename)
+    {
+        $maxWidth = 600; // Ukuran proporsional HP
+        
+        $source = $file->getPathname();
+        $info = getimagesize($source);
+        $mime = $info["mime"];
+        
+        if ($mime == "image/jpeg") $image = imagecreatefromjpeg($source);
+        elseif ($mime == "image/png") $image = imagecreatefrompng($source);
+        elseif ($mime == "image/gif") $image = imagecreatefromgif($source);
+        elseif ($mime == "image/webp") $image = imagecreatefromwebp($source);
+        else return false;
+
+        $width = $info[0];
+        $height = $info[1];
+        
+        // Resize jika lebih besar dari maxWidth
+        if ($width > $maxWidth) {
+            $newWidth = $maxWidth;
+            $newHeight = floor($height * ($maxWidth / $width));
+        } else {
+            $newWidth = $width;
+            $newHeight = $height;
+        }
+        
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        
+        // Jaga transparansi untuk PNG/WebP
+        if ($mime == "image/png" || $mime == "image/webp") {
+            imagealphablending($newImage, false);
+            imagesavealpha($newImage, true);
+            $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
+            imagefilledrectangle($newImage, 0, 0, $newWidth, $newHeight, $transparent);
+        }
+        
+        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        
+        $fullPath = storage_path("app/public/" . $destinationFolder);
+        if (!file_exists($fullPath)) {
+            mkdir($fullPath, 0755, true);
+        }
+        
+        // Convert paksa menjadi format WebP kualitas 80% (Sangat Kecil & Tajam)
+        imagewebp($newImage, $fullPath . "/" . $filename, 80);
+        
+        imagedestroy($image);
+        imagedestroy($newImage);
+        
+        return true;
+    }
 }
-
-
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="utf-8"/>
@@ -12,7 +12,7 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
             background-color: #0b192c;
-            background-image: url("{{ asset('img/bg-hero.png') }}");
+            background-image: url("{{ asset('img/bg-hero.webp') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -30,9 +30,8 @@
             content: "";
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(-45deg, rgba(11,25,44,0.85), rgba(26,54,93,0.85), rgba(43,108,176,0.85), rgba(44,122,123,0.85));
-            background-size: 400% 400%;
-            animation: gradientMove 15s ease infinite;
+            /* LCP Optimization: Removed heavy animation, replaced with a static modern gradient */
+            background: linear-gradient(135deg, rgba(11,25,44,0.95), rgba(43,108,176,0.85));
             z-index: -1;
         }
 
@@ -456,4 +455,6 @@
     </script>
 </body>
 </html>
+
+
 
