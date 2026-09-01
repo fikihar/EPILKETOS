@@ -261,7 +261,7 @@
     <header class="navbar navbar-expand-md glass-nav d-print-none sticky-top">
         <div class="container-xl">
             <h1 class="navbar-brand d-none-navbar-horizontal pe-0 pe-md-3 mb-0">
-                <img src="{{ asset('img/epilketos-logo.jpg') }}" height="36" alt="Logo E-Pilketos" class="me-2 rounded shadow-sm">
+                <img src="{{ asset('img/epilketos-logo.webp') }}" height="36" alt="Logo E-Pilketos" class="me-2 rounded shadow-sm">
                 <span class="text-white fw-bold">E-Pilketos</span>
             </h1>
             <div class="navbar-nav flex-row order-md-last ms-auto">
@@ -317,7 +317,7 @@
                             src="{{ $k->photo_url }}"
                             class="card-img-top kandidat-img"
                             alt="Foto Paslon {{ sprintf('%02d', $k->no) }}: {{ $k->nama }}"
-                            onerror="this.onerror=null; this.src='{{ asset('img/epilketos-logo.jpg') }}';">
+                            onerror="this.onerror=null; this.src='{{ asset('img/epilketos-logo.webp') }}';">
                     </div>
                     <div class="card-body text-center d-flex flex-column justify-content-center py-4">
                         @php
@@ -453,3 +453,4 @@
 </body>
 
 </html>
+

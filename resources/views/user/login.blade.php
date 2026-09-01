@@ -197,7 +197,7 @@
     <div class="glass-login-box">
 
         {{-- Logo â€” FIX #5: Logo tidak bisa diklik agar tidak keluar halaman login tidak sengaja --}}
-        <img src="{{ asset('img/epilketos-logo.jpg') }}" alt="Logo E-Pilketos" class="login-logo">
+        <img src="{{ asset('img/epilketos-logo.webp') }}" alt="Logo E-Pilketos" class="login-logo">
 
         <h2 class="h2 mb-2 font-heading text-white">Login Bilik Suara</h2>
         <p class="text-white-50 mb-4" style="font-size: 14px; line-height: 1.6;">Gunakan NIS Anda untuk masuk</p>
@@ -331,4 +331,5 @@
 </body>
 
 </html>
+
 

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="utf-8"/>
@@ -115,7 +115,7 @@
             <div class="text-center mb-4">
                 <a href="#" class="navbar-brand navbar-brand-autodark">
                     <!-- FIX UI/UX: Alt text logo -->
-                    <img src="{{ asset('img/epilketos-logo.jpg') }}" height="56" alt="Logo Administrator E-Pilketos" class="rounded-3 shadow-sm">
+                    <img src="{{ asset('img/epilketos-logo.webp') }}" height="56" alt="Logo Administrator E-Pilketos" class="rounded-3 shadow-sm">
                 </a>
             </div>
             
@@ -211,3 +211,4 @@
     </script>
 </body>
 </html>
+

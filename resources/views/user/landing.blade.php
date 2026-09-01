@@ -253,7 +253,7 @@
     <header class="navbar navbar-expand-md glass-nav d-print-none sticky-top">
         <div class="container-xl">
             <h1 class="navbar-brand d-none-navbar-horizontal pe-0 pe-md-3">
-                <img src="{{ asset('img/epilketos-logo.jpg') }}" width="36" height="36" alt="E-Pilketos Logo" class="me-2 rounded shadow-sm" style="object-fit: cover;">
+                <img src="{{ asset('img/epilketos-logo.webp') }}" width="36" height="36" alt="E-Pilketos Logo" class="me-2 rounded shadow-sm" style="object-fit: cover;">
                 <span class="text-white fw-bold tracking-wide">E-Pilketos</span>
             </h1>
             <div class="navbar-nav flex-row order-md-last ms-auto">
@@ -456,6 +456,7 @@
     </script>
 </body>
 </html>
+
 
 
 

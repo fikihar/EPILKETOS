@@ -36,8 +36,8 @@
             </td>
             <td width="15%" style="text-align: center; vertical-align: middle;">
                 <!-- Logo OSIS di Kanan -->
-                @if(file_exists(public_path("img/logo-osis.png")))
-                <img src="{{ public_path("img/logo-osis.png") }}" style="height: 85px; width: auto;" alt="Logo OSIS">
+                @if(file_exists(public_path("img/logo-osis.webp")))
+                <img src="{{ public_path("img/logo-osis.webp") }}" style="height: 85px; width: auto;" alt="Logo OSIS">
                 @endif
             </td>
         </tr>
@@ -95,6 +95,7 @@
     </table>
 </body>
 </html>
+
 
 
 
