@@ -4,9 +4,10 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <title>E-Pilketos | {{ $sekolah->nm_sekolah ?? "SMK" }}</title>
+    <!-- Preconnect CDN -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- Tabler CSS -->
     <link href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet"/>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         /* Animated Mesh Gradient Background */
         body { 
@@ -252,7 +253,7 @@
     <header class="navbar navbar-expand-md glass-nav d-print-none sticky-top">
         <div class="container-xl">
             <h1 class="navbar-brand d-none-navbar-horizontal pe-0 pe-md-3">
-                <img src="{{ asset('img/epilketos-logo.jpg') }}" height="36" alt="E-Pilketos Logo" class="me-2 rounded shadow-sm" style="object-fit: cover;">
+                <img src="{{ asset('img/epilketos-logo.jpg') }}" width="36" height="36" alt="E-Pilketos Logo" class="me-2 rounded shadow-sm" style="object-fit: cover;">
                 <span class="text-white fw-bold tracking-wide">E-Pilketos</span>
             </h1>
             <div class="navbar-nav flex-row order-md-last ms-auto">
@@ -307,7 +308,7 @@
                         <div class="card glass-card h-100 border-0">
                             <div class="position-relative">
                                 <div class="number-badge">Paslon {{ sprintf("%02d", $k->no) }}</div>
-                                <img src="{{ $k->photo_url }}" class="card-img-top kandidat-img" alt="Foto {{ $k->nama }}" style="cursor: pointer;" onclick="previewFoto('{{ $k->photo_url }}', '{{ addslashes($k->nama) }}')">
+                                <img src="{{ $k->photo_url }}" width="400" height="400" class="card-img-top kandidat-img" alt="Foto {{ $k->nama }}" style="cursor: pointer;" onclick="previewFoto('{{ $k->photo_url }}', '{{ addslashes($k->nama) }}')">
                             </div>
                             <div class="card-body text-center d-flex flex-column justify-content-center py-3 py-md-4">
                                 @php
@@ -455,6 +456,7 @@
     </script>
 </body>
 </html>
+
 
 
 
