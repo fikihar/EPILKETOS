@@ -45,11 +45,12 @@ class AuthController extends Controller
         ]);
 
         $admin = Auth::guard("admin")->user();
-        $admin->password = \Illuminate\Support\Facades\Hash::make($request->password);
+        $admin->password = $request->password; // Model Admin sudah otomatis melakukan Hash::make via setPasswordAttribute
         $admin->save();
 
         return back()->with("success", "Password Admin berhasil diperbarui!");
     }
 }
+
 
 
