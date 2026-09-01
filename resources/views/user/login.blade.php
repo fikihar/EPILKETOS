@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -16,7 +16,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: #0b192c;
-            background-image: url("{{ asset('img/bg-hero.png') }}");
+            background-image: url("{{ asset('img/bg-hero.webp') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -196,7 +196,7 @@
 <body>
     <div class="glass-login-box">
 
-        {{-- Logo — FIX #5: Logo tidak bisa diklik agar tidak keluar halaman login tidak sengaja --}}
+        {{-- Logo â€” FIX #5: Logo tidak bisa diklik agar tidak keluar halaman login tidak sengaja --}}
         <img src="{{ asset('img/epilketos-logo.jpg') }}" alt="Logo E-Pilketos" class="login-logo">
 
         <h2 class="h2 mb-2 font-heading text-white">Login Bilik Suara</h2>
@@ -301,7 +301,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // FIX #2: Toggle password — sekarang pakai <button> sehingga bisa dikontrol via keyboard
+        // FIX #2: Toggle password â€” sekarang pakai <button> sehingga bisa dikontrol via keyboard
         document.getElementById("togglePassword").addEventListener("click", function () {
             const passwordInput = document.getElementById("passwordInput");
             const eyeIcon = document.getElementById("eyeIcon");
@@ -331,3 +331,4 @@
 </body>
 
 </html>
+

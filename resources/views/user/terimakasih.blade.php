@@ -10,7 +10,7 @@
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
             background-color: #0b192c;
-            background-image: url("{{ asset('img/bg-hero.png') }}");
+            background-image: url("{{ asset('img/bg-hero.webp') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -233,3 +233,4 @@
     </script>
 </body>
 </html>
+

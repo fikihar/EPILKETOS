@@ -15,7 +15,7 @@
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background-color: #0b192c;
-            background-image: url("{{ asset('img/bg-hero.png') }}");
+            background-image: url("{{ asset('img/bg-hero.webp') }}");
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
