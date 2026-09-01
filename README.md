@@ -1,59 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# EPILKETOS - Sistem E-Voting Pemilihan Ketua OSIS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Sistem Informasi E-Voting Pemilihan Ketua OSIS (EPILKETOS) berbasis Web & Mobile-First.
+Di-upgrade dari CodeIgniter 3 ke **Laravel 11** untuk performa yang lebih baik, kode yang lebih terstruktur, dan antarmuka *mobile-first* yang optimal digunakan oleh pemilih melalui smartphone.
 
-## About Laravel
+## 🚀 Fitur Utama
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+*   **Mobile-First Voting:** Antarmuka pemungutan suara didesain 100% responsif dan dioptimalkan untuk layar HP.
+*   **Dual Authentication:** Login terpisah yang aman untuk Admin dan Siswa (Pemilih).
+*   **Keamanan Terjamin:** Password di-hash menggunakan `Bcrypt`, anti double-vote, dan proteksi multi-step konfirmasi.
+*   **Manajemen DPT Mudah:** Dukungan import Data Pemilih Tetap (DPT) massal menggunakan format Excel.
+*   **Laporan Otomatis:** Export hasil voting dan daftar hadir dalam format PDF (DomPDF).
+*   **Real-time Dashboard:** Pantau hasil perolehan suara secara langsung di panel admin.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## 🛠️ Persyaratan Sistem
 
-## Learning Laravel
+Pastikan server atau lokal environment Anda memenuhi spesifikasi berikut:
+*   PHP >= 8.2
+*   Composer >= 2.0
+*   MySQL >= 8.0 (atau MariaDB setara)
+*   Web Server (Apache/Nginx/Laragon)
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 📥 Panduan Instalasi (Development)
 
-## Laravel Sponsors
+Ikuti langkah-langkah berikut untuk menginstall dan menjalankan aplikasi di komputer lokal (misal: menggunakan Laragon / XAMPP):
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+1. **Clone Repository**
+   ```bash
+   git clone -b production https://github.com/fikihar/EPILKETOS.git
+   cd EPILKETOS
+   ```
 
-### Premium Partners
+2. **Install Dependensi PHP**
+   ```bash
+   composer install
+   ```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+3. **Konfigurasi Environment**
+   Duplikat file `.env.example` menjadi `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+   Buka file `.env` dan sesuaikan koneksi database Anda:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=db_pilketos
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
 
-## Contributing
+4. **Generate Application Key**
+   ```bash
+   php artisan key:generate
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+5. **Buat Database**
+   Buat database kosong bernama `db_pilketos` (atau sesuai nama di `.env`) pada MySQL/phpMyAdmin Anda.
 
-## Code of Conduct
+6. **Jalankan Migrasi & Seeder Database**
+   Perintah ini akan membuat struktur tabel beserta data awal (Data Admin, Identitas Sekolah, dan Data Kelas).
+   ```bash
+   php artisan migrate --seed
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+7. **Storage Link (Opsional tapi direkomendasikan)**
+   Untuk menampilkan foto kandidat secara publik, jalankan:
+   ```bash
+   php artisan storage:link
+   ```
 
-## Security Vulnerabilities
+8. **Jalankan Aplikasi**
+   Jika menggunakan Laragon, aplikasi biasanya bisa diakses via `http://epilketos.test`. Jika tidak, jalankan server bawaan artisan:
+   ```bash
+   php artisan serve
+   ```
+   Akses di browser: `http://localhost:8000`
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 👑 Uji Coba Panel Admin
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Panel admin digunakan oleh panitia/guru untuk mengelola semua data sebelum dan sesudah pemilihan.
+
+1. Buka URL halaman admin:
+   `http://localhost:8000/admin` (atau `http://epilketos.test/admin/login`)
+2. Login menggunakan kredensial default bawaan seeder:
+   *   **Username:** `admin`
+   *   **Password:** `admin`
+3. **Hal yang bisa Anda lakukan di Admin Panel:**
+   *   **Identitas Sekolah:** Ubah logo, nama sekolah, dan nama panitia Pilketos.
+   *   **Manajemen Kelas:** Tambah/Edit data kelas.
+   *   **Manajemen Kandidat:** Tambahkan paslon dan upload foto kandidat (disarankan rasio portrait 3:4).
+   *   **Manajemen DPT (Siswa):** 
+       *   Anda bisa menambahkan siswa manual, ATAU
+       *   **Download Template Excel** yang tersedia, isi data DPT Anda, lalu **Import** sekaligus!
+   *   **Pantau Suara:** Lihat grafik / bar perolehan suara langsung di menu Dashboard.
+   *   **Cetak Laporan:** Cetak Laporan Hasil Voting & Daftar Hadir (PDF) di menu Cetak Laporan.
+
+---
+
+## 📱 Uji Coba Portal Siswa (Voting)
+
+Digunakan oleh siswa untuk memberikan suara melalui HP/Komputer.
+
+1. Buka URL landing page aplikasi (misal menggunakan HP):
+   `http://localhost:8000` (atau `http://epilketos.test`)
+2. Klik tombol **Login Pemilih**.
+3. Login menggunakan data siswa yang sudah ada di database (DPT).
+   *   **Username:** `(Gunakan NISN siswa)`
+   *   **Password Default:** `(Sama dengan NISN siswa)`
+4. **Alur Voting:**
+   *   Siswa akan melihat kartu para kandidat secara vertikal.
+   *   Klik tombol **PILIH** pada kandidat yang diinginkan.
+   *   Akan muncul **Modal Konfirmasi (2 Langkah)** untuk meyakinkan pilihan.
+   *   Setelah sukses memilih, akun siswa otomatis ter-*logout* dan siswa tersebut tidak bisa login/memilih lagi.
+
+---
+
+## 📝 Lisensi
+Proyek ini dikembangkan khusus untuk SMKS Walisongo Pecangaan, Jepara.
+Developer & Owner: **fikihar**
